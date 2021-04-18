@@ -1,4 +1,5 @@
 /config.py
+/last_updated.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
