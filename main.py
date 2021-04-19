@@ -11,14 +11,15 @@ updated = Parser.find_updated(data)
 
 print('Incident from {} is {}'.format(updated, incidence))
 
-last_updated_filename = 'last_updated.txt'
-open(last_updated_filename, 'a').close()
-with open(last_updated_filename, 'r+') as text_file:
+with open('last_updated.txt', 'a+') as text_file:
+    text_file.seek(0)
     if text_file.read() != updated:
         prowl = Prowl(config.prowlApiKey)
-        prowStatus = prowl.send_notification('Neue 7-Tage-Inzidenz von {} für München. Stand: {}'.format(incidence, updated))
+        prowStatus = prowl.send_notification(
+            'Neue 7-Tage-Inzidenz von {} für München. Stand: {}'.format(incidence, updated))
         print('Sent notification with status {}'.format(prowStatus))
 
+        text_file.seek(0)
         text_file.truncate()
         text_file.write(updated)
     else:
