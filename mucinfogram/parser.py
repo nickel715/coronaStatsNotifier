@@ -8,10 +8,12 @@ def _find_nth(haystack: str, needle: str, n: int):
 
 
 class Parser:
+    INCIDENCE_POSITION = 7
+
     @staticmethod
     def find_incidence(content: str) -> str:
         needle = '"text":"'
-        offset = _find_nth(content, needle, 6)
+        offset = _find_nth(content, needle, Parser.INCIDENCE_POSITION)
 
         num_start = offset + len(needle)
         num_end = content.find('"', num_start)
